@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect the Boxes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Connect the Boxes</h1>
+            <div class="instructions">
+                <p>1. Connect all 3 Box A to A, B to B and C to C with 3 lines (need not be straight)</p>
+                <p>2. Lines should not touch the Rectangle or Box or other lines</p>
+            </div>
+            <button id="reset-btn">Reset Board</button>
+        </header>
+
+        <div id="game-board" class="board">
+            <canvas id="drawing-canvas"></canvas>
+
+            <!-- Win Screen Overlay -->
+            <div id="win-screen" class="win-screen hidden">
+                <h2>Congratulations!</h2>
+                <p>You have successfully connected all the boxes!</p>
+                <button id="play-again-btn">Play Again</button>
+            </div>
+
+            <!-- Top Row -->
+            <!-- B touching top center -->
+            <div class="box-wrapper" style="top: 0; left: 50%; transform: translateX(-50%);">
+                <div class="box" data-type="B" id="box-b1">B</div>
+            </div>
+
+            <!-- Middle Row - A and C closer -->
+            <div class="box-wrapper" style="top: 30%; left: 15%;">
+                <div class="box" data-type="C" id="box-c1">C</div>
+            </div>
+            <div class="box-wrapper" style="top: 30%; right: 15%;">
+                <div class="box" data-type="A" id="box-a1">A</div>
+            </div>
+
+            <!-- Bottom Row - Touching Bottom -->
+            <div class="box-wrapper" style="bottom: 0; left: 15%;">
+                <div class="box" data-type="A" id="box-a2">A</div>
+            </div>
+            <div class="box-wrapper" style="bottom: 0; left: 50%; transform: translateX(-50%);">
+                <div class="box" data-type="B" id="box-b2">B</div>
+            </div>
+            <div class="box-wrapper" style="bottom: 0; right: 15%;">
+                <div class="box" data-type="C" id="box-c2">C</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
