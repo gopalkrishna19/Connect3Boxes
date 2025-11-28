@@ -111,8 +111,7 @@ function getMousePos(e) {
 
 function handleStart(e) {
     const pos = getMousePos(e);
-    const box = getBoxAt(pos, 10); // 30px padding for easier grabbing
-
+    const box = getBoxAt(pos); // No padding
     if (box) {
         // Check if this box is already connected or part of a completed line
         // Actually, we usually allow redrawing. So if we start from a box that has a line, we might remove that line.
