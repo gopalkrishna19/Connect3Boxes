@@ -63,7 +63,11 @@ function init() {
 
     canvas.addEventListener('touchend', (e) => {
         e.preventDefault();
-        const mouseEvent = new MouseEvent('mouseup', {});
+        const touch = e.changedTouches[0];
+        const mouseEvent = new MouseEvent('mouseup', {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
         canvas.dispatchEvent(mouseEvent);
     });
 
@@ -107,7 +111,7 @@ function getMousePos(e) {
 
 function handleStart(e) {
     const pos = getMousePos(e);
-    const box = getBoxAt(pos);
+    const box = getBoxAt(pos, 10); // 30px padding for easier grabbing
 
     if (box) {
         // Check if this box is already connected or part of a completed line
@@ -152,7 +156,7 @@ function handleEnd(e) {
     if (!isDrawing || !currentLine) return;
 
     const pos = getMousePos(e);
-    const box = getBoxAt(pos);
+    const box = getBoxAt(pos, 30); // 30px padding for easier snapping
 
     if (box) {
         // Check if it's a valid target
@@ -188,12 +192,12 @@ function cancelDrawing() {
     draw();
 }
 
-function getBoxAt(pos) {
+function getBoxAt(pos, padding = 0) {
     return boxes.find(box =>
-        pos.x >= box.x &&
-        pos.x <= box.x + box.width &&
-        pos.y >= box.y &&
-        pos.y <= box.y + box.height
+        pos.x >= box.x - padding &&
+        pos.x <= box.x + box.width + padding &&
+        pos.y >= box.y - padding &&
+        pos.y <= box.y + box.height + padding
     );
 }
 
